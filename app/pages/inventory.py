@@ -58,7 +58,7 @@ if st.button("📈 Optimize Inventory", use_container_width=True):
         with st.spinner("Analyzing Inventory..."):
 
             response = requests.post(
-                "http://127.0.0.1:8000/inventory/predict",
+                "https://retail-pulse-ht37.onrender.com/inventory/predict",
                 json=payload,
                 timeout=60
             )

@@ -41,7 +41,7 @@ with tab1:
             with st.spinner("Predicting..."):
 
                 response = requests.post(
-                    "http://127.0.0.1:8000/churn/predict-cust_ID",
+                    "https://retail-pulse-ht37.onrender.com/churn/predict-cust_ID",
                     json=payload
                 )
 
@@ -136,7 +136,7 @@ with tab2:
             with st.spinner("Predicting..."):
 
                 response = requests.post(
-                    "http://127.0.0.1:8000/churn/predict-rfm",
+                    "https://retail-pulse-ht37.onrender.com/churn/predict-rfm",
                     json=payload
                 )
 

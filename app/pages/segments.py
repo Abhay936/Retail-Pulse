@@ -16,7 +16,7 @@ customer_id = st.number_input(
 
 if st.button("🔍 Predict Segment", use_container_width=True):
 
-    url = "http://127.0.0.1:8000/customer-segmentation/predict"
+    url = "https://retail-pulse-ht37.onrender.com/customer-segmentation/predict"
 
     payload = {
         "customer_id": int(customer_id)

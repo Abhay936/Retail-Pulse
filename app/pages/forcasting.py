@@ -40,7 +40,7 @@ with tab1:
             with st.spinner("Generating Forecast..."):
 
                 response = requests.get(
-                    "http://127.0.0.1:8000/forecast/predict",
+                    "https://retail-pulse-ht37.onrender.com/forecast/predict",
                     params={"days": days}
                 )
 
@@ -144,7 +144,7 @@ with tab2:
         with st.spinner("Predicting Demand..."):
 
             response = requests.post(
-                "http://127.0.0.1:8000/forecast/product",
+                "https://retail-pulse-ht37.onrender.com/forecast/product",
                 json=payload
             )
 
