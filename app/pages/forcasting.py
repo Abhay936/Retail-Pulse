@@ -116,122 +116,232 @@ with tab1:
 # TAB 2 : PRODUCT DEMAND FORECAST
 # =====================================================
 
-with tab2:
+# with tab2:
+#     st.subheader("📦 Product Demand Forecast")
 
+# # =====================================
+# # User Input
+# # =====================================
+#     stock_code = st.text_input(
+#     "📦 Stock Code",
+#     placeholder="Example: 85123A"
+# )
+
+# # =====================================
+# # Prediction Button
+# # =====================================
+
+#     if st.button("🔮 Predict Product Demand", use_container_width=True):
+
+#         if stock_code.strip() == "":
+#             st.warning("Please enter a Stock Code.")
+#             st.stop()
+
+#         payload = {
+#         "StockCode": stock_code.strip()
+#     }
+
+#         try:
+
+#             with st.spinner("Predicting Demand..."):
+
+#                 response = requests.post(
+#                 "https://retail-pulse-ht37.onrender.com/forecast/product",
+#                 json=payload,
+#                 timeout=30
+#             )
+
+#             if response.status_code == 200:
+
+#                 result = response.json()
+
+#                 st.success("Prediction Completed Successfully")
+
+#             # ===============================
+#             # Main KPIs
+#             # ===============================
+
+#                 col1, col2, col3 = st.columns(3)
+
+#                 col1.metric(
+#                 "📦 Stock Code",
+#                 result["StockCode"]
+#             )
+
+#                 col2.metric(
+#                 "📅 Prediction Date",
+#                 result["PredictionDate"]
+#             )
+
+#                 col3.metric(
+#                 "📈 Forecast Demand",
+#                 f"{result['ForecastDemand']} Units"
+#             )
+            
+#                 st.divider()
+
+#             # ===============================
+#             # Inventory KPIs
+#             # ===============================
+
+#                 col4, col5, col6 = st.columns(3)
+
+#                 col4.metric(
+#                 "📦 Current Stock",
+#                 result["CurrentStock"]
+#             )
+
+#                 col5.metric(
+#                 "🛡 Safety Stock",
+#                 result["SafetyStock"]
+#             )
+
+#                 col6.metric(
+#                 "🛒 Suggested Reorder",
+#                 result["SuggestedReorder"]
+#             )
+
+#                 st.divider()
+
+#             # ===============================
+#             # Historical KPIs
+#             # ===============================
+
+#                 col7, col8, col9 = st.columns(3)
+
+#                 col7.metric(
+#                 "💰 Last Revenue",
+#                 f"£{result['LastRevenue']:.2f}"
+#             )
+
+#                 col8.metric(
+#                 "🛒 Last Order Value",
+#                 f"£{result['LastOrderValue']:.2f}"
+#             )
+
+#                 col9.metric(
+#                 "🧺 Basket Size",
+#                 result["LastBasketSize"]
+#             )
+
+#                 st.divider()
+
+#             # ===============================
+#             # Business Insight
+#             # ===============================
+
+#                 demand = result["ForecastDemand"]
+
+#                 if demand >= 50:
+
+#                     st.success(
+#                     "📈 High demand expected. Increase inventory to avoid stock-outs."
+#                 )
+
+#                 elif demand >= 20:
+
+#                     st.info(
+#                     "📊 Moderate demand expected. Monitor stock levels regularly."
+#                 )
+
+#                 else:
+
+#                     st.warning(
+#                     "📉 Low demand expected. Reordering is currently not necessary."
+#                 )
+#             else:
+#                 try:
+#                     st.error(response.json()["detail"])
+#                 except Exception:
+#                     st.error(f"API Error ({response.status_code})")
+
+#         except requests.exceptions.RequestException as e:
+#             st.error(f"Request Failed: {e}")
+
+
+with tab2:
 
     st.subheader("📦 Product Demand Forecast")
 
     stock_code = st.text_input(
-    "📦 Stock Code",
-    placeholder="Example : 85123A"
-)
+        "📦 Stock Code",
+        placeholder="Example: 85123A",
+        key="stock_code"
+    )
 
-    if st.button(
-    "🔮 Predict Product Demand",
-    use_container_width=True
-):
+    if st.button("🔮 Predict Product Demand", use_container_width=True):
 
-        if stock_code.strip() == "":
+        if not stock_code.strip():
             st.warning("Please enter a Stock Code.")
             st.stop()
 
         payload = {
-        "StockCode": stock_code
-    }
+            "StockCode": stock_code.strip()
+        }
 
-    try:
+        try:
 
-        with st.spinner("Predicting Demand..."):
+            with st.spinner("Predicting Demand..."):
 
-            response = requests.post(
-                "https://retail-pulse-ht37.onrender.com/forecast/product",
-                json=payload
-            )
+                response = requests.post(
+                    "https://retail-pulse-ht37.onrender.com/forecast/product",
+                    json=payload,
+                    timeout=30
+                )
 
-        if response.status_code == 200:
+            if response.status_code != 200:
+                st.error(response.json().get("detail", "Prediction Failed"))
+                st.stop()
 
             result = response.json()
 
             st.success("Prediction Completed Successfully")
 
-            # ===========================
-            # Main KPIs
-            # ===========================
+            # ==========================
+            # Main Metrics
+            # ==========================
 
             c1, c2, c3 = st.columns(3)
 
-            c1.metric(
-                "📦 Stock Code",
-                result["StockCode"]
-            )
-
-            c2.metric(
-                "📅 Prediction Date",
-                result["PredictionDate"]
-            )
-
-            c3.metric(
-                "📈 Forecast Demand",
-                f"{result['ForecastDemand']} Units"
-            )
+            c1.metric("📦 Stock Code", result["StockCode"])
+            c2.metric("📅 Prediction Date", result["PredictionDate"])
+            c3.metric("📈 Forecast Demand", f"{result['ForecastDemand']} Units")
 
             st.divider()
 
-            # ===========================
+            # ==========================
             # Inventory Metrics
-            # ===========================
+            # ==========================
 
             c4, c5, c6 = st.columns(3)
 
-            c4.metric(
-                "📦 Current Stock",
-                result["CurrentStock"]
-            )
-
-            c5.metric(
-                "🛡 Safety Stock",
-                result["SafetyStock"]
-            )
-
-            c6.metric(
-                "🛒 Suggested Reorder",
-                result["SuggestedReorder"]
-            )
+            c4.metric("📦 Current Stock", result["CurrentStock"])
+            c5.metric("🛡 Safety Stock", result["SafetyStock"])
+            c6.metric("🛒 Suggested Reorder", result["SuggestedReorder"])
 
             st.divider()
 
-            # ===========================
+            # ==========================
             # Historical Metrics
-            # ===========================
+            # ==========================
 
             c7, c8, c9 = st.columns(3)
 
-            c7.metric(
-                "💰 Last Revenue",
-                f"£{result['LastRevenue']:.2f}"
-            )
-
-            c8.metric(
-                "🛒 Last Order Value",
-                f"£{result['LastOrderValue']:.2f}"
-            )
-
-            c9.metric(
-                "🧺 Basket Size",
-                result["LastBasketSize"]
-            )
+            c7.metric("💰 Last Revenue", f"£{result['LastRevenue']:.2f}")
+            c8.metric("🛒 Last Order Value", f"£{result['LastOrderValue']:.2f}")
+            c9.metric("🧺 Basket Size", result["LastBasketSize"])
 
             st.divider()
 
-            # ===========================
+            # ==========================
             # Business Insight
-            # ===========================
+            # ==========================
 
             demand = result["ForecastDemand"]
 
             if demand >= 50:
                 st.success(
-                    "📈 High demand expected. Ensure sufficient inventory to avoid stock-outs."
+                    "📈 High demand expected. Increase inventory to avoid stock-outs."
                 )
 
             elif demand >= 20:
@@ -241,13 +351,11 @@ with tab2:
 
             else:
                 st.warning(
-                    "📉 Low demand expected. Reordering may not be necessary at this time."
+                    "📉 Low demand expected. Reordering is currently not necessary."
                 )
 
-        else:
+        except requests.exceptions.RequestException as e:
+            st.error(f"API Error: {e}")
 
-            st.error(response.json()["detail"])
-
-    except Exception as e:
-
-        st.error(f"API Error: {e}")
+        except Exception as e:
+            st.error(f"Unexpected Error: {e}")
