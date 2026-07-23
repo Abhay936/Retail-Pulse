@@ -10,7 +10,8 @@ response = requests.get(
     "https://retail-pulse-ht37.onrender.com/dashboard-data"
 )
 
-df2 = pd.DataFrame(response.json())
+result = response.json()
+df2 = pd.DataFrame(result["data"])
 
 
 
