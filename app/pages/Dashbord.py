@@ -174,3 +174,45 @@ with col3:
 
 with col4:
     st.info(f"📅 Peak Sales Month\n\n{month} \n\n💰 Revenue : {month_revenue}")
+
+# import requests
+# import streamlit as st
+# import pandas as pd
+
+# API_URL = "https://retail-pulse-ht37.onrender.com/data_load/dashboard"
+
+# try:
+#     response = requests.get(API_URL, timeout=30)
+
+#     st.write("Status Code:", response.status_code)
+#     st.write("Content-Type:", response.headers.get("content-type"))
+
+#     if response.status_code != 200:
+#         st.error(f"API Error: {response.status_code}")
+#         st.code(response.text)
+#         st.stop()
+
+#     try:
+#         result = response.json()
+#     except ValueError:
+#         st.error("API did not return JSON")
+#         st.code(response.text)
+#         st.stop()
+
+#     df = pd.DataFrame(result["data"])
+#     st.dataframe(df.head())
+
+# except requests.exceptions.RequestException as e:
+#     st.error(f"Request Failed: {e}")
+
+
+# import requests
+# import streamlit as st
+
+# url = "https://retail-pulse-ht37.onrender.com/data_load/dashboard"
+
+# response = requests.get(url)
+
+# st.write(response.url)
+# st.write(response.status_code)
+# st.code(response.text[:1000])
