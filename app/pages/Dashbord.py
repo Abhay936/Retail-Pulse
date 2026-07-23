@@ -3,19 +3,25 @@ import pandas as pd
 from  backend.database import collection
 import pandas as pd
 import requests
-# from backend.utils import load_data
+
+
+# response = requests.get(
+#     "https://retail-pulse-ht37.onrender.com/data_load/dashboard"
+# )
+
+# result = response.json()
+# df1 = pd.DataFrame(result["data"])
+
+
+@st.cache_data
+def load_data():
+    url = "https://huggingface.co/Abhay936/Retail_pulse/resolve/main/feature_engineered_data.csv"
+    return pd.read_csv(url)
+
+df1 = load_data()
 
 
 
-
-# df = load_data()
-
-response = requests.get(
-    "https://retail-pulse-ht37.onrender.com/data_load/dashboard"
-)
-
-result = response.json()
-df1 = pd.DataFrame(result["data"])
 
 
 
