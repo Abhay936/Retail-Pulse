@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from backend.database import collection
+# from backend.database import collection
 import pandas as pd
 # import requests
 
