@@ -11,7 +11,7 @@ import requests
 # df = load_data()
 
 response = requests.get(
-    "https://retail-pulse-ht37.onrender.com/dashboard-data"
+    "https://retail-pulse-ht37.onrender.com/dashboard"
 )
 
 result = response.json()

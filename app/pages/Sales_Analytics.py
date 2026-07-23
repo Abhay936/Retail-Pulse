@@ -7,7 +7,7 @@ import pandas as pd
 import requests
 
 response = requests.get(
-    "https://retail-pulse-ht37.onrender.com/dashboard-data"
+    "https://retail-pulse-ht37.onrender.com/dashboard"
 )
 
 result = response.json()
