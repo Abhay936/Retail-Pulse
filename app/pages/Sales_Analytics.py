@@ -3,12 +3,19 @@ import pandas as pd
 import plotly.express as px
 from backend.database import collection
 import pandas as pd
-from backend.utils import load_data
+# from backend.utils import load_data
+import requests
+
+response = requests.get(
+    "https://retail-pulse-ht37.onrender.com/dashboard-data"
+)
+
+df2 = pd.DataFrame(response.json())
 
 
 
 
-df2=load_data()
+# df2=load_data()
 
 
 st.set_page_config(page_title="Sales Analytics",

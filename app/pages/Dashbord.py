@@ -2,18 +2,19 @@ import streamlit as st
 import pandas as pd
 from  backend.database import collection
 import pandas as pd
-from backend.utils import load_data
+import requests
+# from backend.utils import load_data
 
 
-# @st.cache_data(ttl=600)
-# def load_data1():
-#     records = list(collection.find())
-#     df1 = pd.DataFrame(records)
-#     if "_id" in df1.columns:
-#         df1.drop(columns="_id", inplace=True)
-#         return df1
 
-df = load_data()
+
+# df = load_data()
+
+response = requests.get(
+    "https://retail-pulse-ht37.onrender.com/dashboard-data"
+)
+
+df1 = pd.DataFrame(response.json())
 
 
 
@@ -27,7 +28,7 @@ st.write("📝 RetailPulse is an AI-powered retail analytics platform designed t
 
 
 
-df1 = load_data()
+# df1 = load_data()
 
 
 

@@ -1,6 +1,6 @@
 import pandas as pd
 import streamlit as st
-from backend.database import collection
+from database import collection
 
 @st.cache_data(ttl=600)
 def load_data():
