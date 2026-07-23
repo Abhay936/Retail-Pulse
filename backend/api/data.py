@@ -6,7 +6,8 @@ router = APIRouter(
     tags = ["Data Load"]
 )
 
+
 @router.get("/dashboard")
 def dashboard():
     records = list(collection.find({}, {"_id": 0}))
-    return records
+    return {"data": records}
