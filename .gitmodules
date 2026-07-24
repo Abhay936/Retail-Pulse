@@ -1,0 +1,3 @@
+[submodule "retailpulse-analytics"]
+	path = retailpulse-analytics
+	url = https://github.com/shania-2005/retailpulse-analytics.git
